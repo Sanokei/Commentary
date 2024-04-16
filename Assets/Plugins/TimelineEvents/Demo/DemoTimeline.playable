@@ -41,7 +41,7 @@ MonoBehaviour:
     IsMethodWithParam: 1
     InvokeEventsInEditMode: 1
     TargetObject: {fileID: 0}
-    ArgValue: 20
+    ArgValue: 
 --- !u!114 &114045957196039288
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -113,7 +113,7 @@ MonoBehaviour:
     IsMethodWithParam: 1
     InvokeEventsInEditMode: 1
     TargetObject: {fileID: 0}
-    ArgValue: 1
+    ArgValue: 
 --- !u!114 &114245396658667560
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -167,7 +167,7 @@ MonoBehaviour:
     IsMethodWithParam: 1
     InvokeEventsInEditMode: 0
     TargetObject: {fileID: 0}
-    ArgValue: 0
+    ArgValue: 
 --- !u!114 &114357933186223152
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -185,7 +185,7 @@ MonoBehaviour:
     IsMethodWithParam: 1
     InvokeEventsInEditMode: 0
     TargetObject: {fileID: 0}
-    ArgValue: 1
+    ArgValue: 
 --- !u!114 &114372825633258604
 MonoBehaviour:
   m_ObjectHideFlags: 1
