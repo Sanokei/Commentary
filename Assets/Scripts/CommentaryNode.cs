@@ -3,14 +3,16 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Playables;
 
-[RequireComponent(typeof(BoxCollider), typeof(PlayableDirector), typeof(Animator))]
+[RequireComponent(typeof(Rigidbody), typeof(PlayableDirector), typeof(BoxCollider))]
 public class CommentaryNode : MonoBehaviour
 {
     [SerializeField] Animator _NodeAnimator;
     [SerializeField] PlayableDirector _Dialogue;
     [SerializeField] Renderer _OutterNodeRenderer;
+
+    public delegate void OnPlayableDirectorStopped(PlayableDirector director);
+    public static event OnPlayableDirectorStopped OnPlayableDirectorStoppedEvent; 
     
-    Camera _Camera;
     string _CurrentAnimationState = "Idle";
     bool _isPlaying = false;
     void SetAnimation(string ani)
@@ -26,36 +28,35 @@ public class CommentaryNode : MonoBehaviour
     void OnEnable()
     {
         _Dialogue.stopped += StopPlaying;
+        PlayerInteract.OnCommentaryNodeHitEvent += OnRaycastHit;
     }
     void OnDisable()
     {
         _Dialogue.stopped -= StopPlaying;
+        PlayerInteract.OnCommentaryNodeHitEvent -= OnRaycastHit;
     }
     
     void Awake()
     {
         SetAnimation("Idle");
         _OutterNodeRenderer.material.SetFloat("_Blend", 1);
-        _Camera = Camera.main;
     }
-    RaycastHit hitData;
-    void Update()
+    
+    void OnRaycastHit(RaycastHit hitdata)
     {
-        if(Input.GetKeyDown(KeyCode.E))
+        // FIXME: this feels wrong, but its right???
+        // can be improved with interface, but its good enough for now
+        if(!hitdata.collider.gameObject.Equals(gameObject))
+            return;
+        if(!_isPlaying)
         {
-            if (Physics.Raycast(_Camera.ScreenPointToRay(Input.mousePosition), out hitData, 5) && hitData.transform.tag == "Commentary")
-            {
-                if(!_isPlaying)
-                {
-                    if(CommentaryNodeManager.Instance.PlayingCommentaryNode != null && CommentaryNodeManager.Instance.PlayingCommentaryNode != this)
-                        CommentaryNodeManager.Instance.PlayingCommentaryNode.StopPlaying();
-                    StartPlaying();
-                }
-                else
-                {
-                    StopPlaying();
-                }
-            }
+            if(CommentaryNodeManager.Instance.PlayingCommentaryNode != null && !CommentaryNodeManager.Instance.PlayingCommentaryNode.Equals(this))
+                CommentaryNodeManager.Instance.PlayingCommentaryNode.StopPlaying();
+            StartPlaying();
+        }
+        else
+        {
+            StopPlaying();
         }
     }
     public void StartPlaying()
@@ -72,6 +73,7 @@ public class CommentaryNode : MonoBehaviour
         // It should never be any other playabledirector, take out check for optimization?
         if(director.Equals(_Dialogue))
             StopPlaying();
+        OnPlayableDirectorStoppedEvent?.Invoke(director);
     }
     public void StopPlaying()
     {
