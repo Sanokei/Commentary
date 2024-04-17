@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Playables;
 
-[RequireComponent(typeof(Rigidbody), typeof(PlayableDirector), typeof(BoxCollider))]
+[RequireComponent(typeof(Rigidbody), typeof(Animator), typeof(BoxCollider))]
 public class CommentaryNode : MonoBehaviour
 {
     [SerializeField] Animator _NodeAnimator;
@@ -44,6 +44,8 @@ public class CommentaryNode : MonoBehaviour
     
     void OnRaycastHit(RaycastHit hitdata)
     {
+        if(!Input.GetKeyDown(KeyCode.E))
+            return;
         // FIXME: this feels wrong, but its right???
         // can be improved with interface, but its good enough for now
         if(!hitdata.collider.gameObject.Equals(gameObject))

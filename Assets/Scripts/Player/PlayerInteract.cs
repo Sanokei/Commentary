@@ -12,13 +12,9 @@ public class PlayerInteract : MonoBehaviour
     RaycastHit hitData;
     void Update()
     {
-        // TODO: Make it changable with settings
-        if(Input.GetKeyDown(KeyCode.E))
+        if (Physics.Raycast(_Camera.ScreenPointToRay(Input.mousePosition), out hitData, 5) && hitData.transform.tag == "Commentary")
         {
-            if (Physics.Raycast(_Camera.ScreenPointToRay(Input.mousePosition), out hitData, 5) && hitData.transform.tag == "Commentary")
-            {
-                OnCommentaryNodeHitEvent?.Invoke(hitData);
-            }
+            OnCommentaryNodeHitEvent?.Invoke(hitData);
         }
     }
 }

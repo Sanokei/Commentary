@@ -43,7 +43,6 @@ GameObject:
   m_Component:
   - component: {fileID: 134456383061855265}
   - component: {fileID: 6690181445429160385}
-  - component: {fileID: 8465943723362604796}
   - component: {fileID: 2439685922121161840}
   - component: {fileID: 1367622959300427584}
   - component: {fileID: 2227076792179841851}
@@ -83,29 +82,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _NodeAnimator: {fileID: 2439685922121161840}
-  _Dialogue: {fileID: 8465943723362604796}
+  _Dialogue: {fileID: 0}
   _OutterNodeRenderer: {fileID: 2803729928910612001}
---- !u!320 &8465943723362604796
-PlayableDirector:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7926480118590328283}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_PlayableAsset: {fileID: 0}
-  m_InitialState: 0
-  m_WrapMode: 2
-  m_DirectorUpdateMode: 0
-  m_InitialTime: 0
-  m_SceneBindings:
-  - key: {fileID: 0}
-    value: {fileID: 0}
-  - key: {fileID: -7277449550169076107, guid: 9f4a6c3ce056de64596a407cd8643707, type: 2}
-    value: {fileID: 0}
-  m_ExposedReferences:
-    m_References: []
 --- !u!95 &2439685922121161840
 Animator:
   serializedVersion: 5
